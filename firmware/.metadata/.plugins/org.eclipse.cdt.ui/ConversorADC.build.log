@@ -1,0 +1,10 @@
+22:46:27 **** Incremental Build of configuration Debug for project ConversorADC ****
+make -j4 all 
+arm-none-eabi-size   ConversorADC.elf 
+   text	   data	    bss	    dec	    hex	filename
+   9656	     20	   1716	  11392	   2c80	ConversorADC.elf
+Finished building: default.size.stdout
+ 
+
+22:46:28 Build Finished. 0 errors, 0 warnings. (took 583ms)
+
