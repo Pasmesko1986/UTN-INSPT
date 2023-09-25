@@ -1,11 +1,11 @@
 from fastapi import APIRouter
-from wheater_station.wheater_station.core.database.db_connect import db_health
-from wheater_station.wheater_station.core.database.charts import Chart
-from wheater_station.wheater_station.apis.v1_schemas import InsertChartData
+from wheater_station.core.db.db_connect import db_health
+from wheater_station.core.db.charts import Chart
+from wheater_station.apis.v1_schemas import InsertChartData
 
 router = APIRouter()
 
-@router.get("check-health/", tags=["test"])
+@router.get("/check-health/", tags=["test"])
 def check_database_health():
     return db_health()
 

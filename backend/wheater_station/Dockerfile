@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 
-LABEL name=g_challenge
+LABEL name=wheater_station
 
 # Setup env
 ENV LANG C.UTF-8
@@ -32,7 +32,7 @@ RUN pip install dist/*.whl
 RUN rm -rf pyproject.toml poetry.lock dist
 USER dsuser
 
-COPY startup.py /app
+COPY /wheater_station/core/tools/docker_startup/startup.py /app
 EXPOSE 8020
 EXPOSE 5432
 CMD python startup.py

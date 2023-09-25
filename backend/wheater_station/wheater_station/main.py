@@ -2,9 +2,10 @@ import uvicorn
 import argparse
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from wheater_station.wheater_station.core.database.create_schemas import create_all_schemas
-from wheater_station.wheater_station.apis.v1_application_apis import router as application_apis
-from wheater_station.wheater_station.settings import (
+from wheater_station.core.db.create_schemas import create_all_schemas
+from wheater_station.apis.v1_application_apis import router as application_apis
+from wheater_station.apis.v1_sockets import router as socket_apis
+from wheater_station.settings import (
     ENVIRONMENT,
     HOST,
     PORT)
@@ -30,7 +31,7 @@ app.add_middleware(
 )
 
 app.include_router(application_apis)
-
+app.include_router(socket_apis)
 
 
 if __name__ == "__main__":
