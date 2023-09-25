@@ -34,10 +34,10 @@ app.include_router(application_apis)
 
 
 if __name__ == "__main__":
-    # args = parser.parse_args()
-    # print(args.createschemas)
-    # if args.createschemas:
-    #     create_all_schemas()
+    args = parser.parse_args()
+    print(args.createschemas)
+    if args.createschemas:
+        create_all_schemas()
     
     uvicorn.run(
         'main:app',
