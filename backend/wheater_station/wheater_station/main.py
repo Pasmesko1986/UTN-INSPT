@@ -12,7 +12,7 @@ from wheater_station.wheater_station.settings import (
 parser = argparse.ArgumentParser()
 parser.add_argument('--createschemas', type=bool, required=False)
 
-description = f'''<a href="https://github.com/HectorInove/g-challenge">
+description = f'''<a href="https://github.com/Pasmesko1986/UTN-INSPT">
     <img width=10% src="https://raw.githubusercontent.com/HectorInove/g-challenge/develop/wheater_station/wheater_station/src/docs/assets/octocat.gif"/> Follow the repository...</a>'''
 
 app = FastAPI(
