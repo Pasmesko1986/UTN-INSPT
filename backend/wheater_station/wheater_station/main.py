@@ -13,10 +13,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--createschemas', type=bool, required=False)
 
 description = f'''<a href="https://github.com/Pasmesko1986/UTN-INSPT">
-    <img width=10% src="https://raw.githubusercontent.com/HectorInove/g-challenge/develop/wheater_station/wheater_station/src/docs/assets/octocat.gif"/> Follow the repository...</a>'''
+    <img width=5% src="https://github.com/Pasmesko1986/UTN-INSPT/blob/main/backend/wheater_station/wheater_station/core/assets/inspt_logo.png?raw=true"/> Follow the repository...</a>'''
 
 app = FastAPI(
-    title="G-challenge API service docs page",
+    title="Wheater Station API service docs page",
     description=description,
 )
 origins = ["*"]
