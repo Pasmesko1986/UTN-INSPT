@@ -2,15 +2,17 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Test from './components/lineChartTest'
 import WebSocketComponent from './components/socketTest'
-import LineChart from './components/lineChartTest'
+import { ResponsiveContainer } from 'recharts';
+
 function App() {
   const [count, setCount] = useState(0)
   
   return (
-    <>
+<ResponsiveContainer width="100%" height="100%">
+      <Test/>
       {/* <WebSocketComponent/> */}
-    <LineChart/>
       {/* <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -31,8 +33,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p> */}
-    </>
-  )
+</ResponsiveContainer>  )
 }
 
 export default App
