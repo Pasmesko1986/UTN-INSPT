@@ -8,44 +8,25 @@ import Test from '../components/lineChartTest'
 import ActionAreaCard from '../components/Card';
 // sensor cards:
 import TempCard from '../components/TempCard';
-import RainDrop from '../components/RainDropCard';
+import HumidityCard from '../components/HumidityCard';
+import IndexUVCard from '../components/IndexUVCard';
+import AtmosphericPressureCard from '../components/AtmosphericPressureCard';
 
-
-function FormRow() {
-    return (
-        <React.Fragment>
-            <Grid item xs={4}>
-                {/* <ResponsiveContainer width="100%" height="100%">
-      <Test/>
-      
-</ResponsiveContainer>  */}
-                {/* <WebSocketComponent/> */}
-                <TempCard />
-            </Grid>
-            <Grid item xs={4}>
-                <RainDrop />
-            </Grid>
-            <Grid item xs={4}>
-                <ActionAreaCard />
-
-            </Grid>
-        </React.Fragment>
-    );
-}
+const BORDER = null
+// const BORDER = '1px solid red'
 
 export default function NestedGrid() {
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={1}>
-                <Grid container item spacing={3}>
+        <Box sx={{ flexGrow: 1 , border:BORDER}}>
+            <Grid container spacing={2} >
+                <Grid container item spacing={1} >
                 <TempCard />
                 </Grid>
-                {/* <Grid container item spacing={3}>
-                    <FormRow />
+                <Grid container item spacing={2} sx={{margin:1}}>
+                                <HumidityCard/>
+                                <IndexUVCard/>
+                                <AtmosphericPressureCard/>
                 </Grid>
-                <Grid container item spacing={3}>
-                    <FormRow />
-                </Grid> */}
             </Grid>
         </Box>
     );
