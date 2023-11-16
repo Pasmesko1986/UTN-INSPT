@@ -14,3 +14,4 @@ junit/
 # database files:
 **/database
 # **/.vscode
+.venv

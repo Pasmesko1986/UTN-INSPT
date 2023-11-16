@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+pyserial
+psycopg2-binary
+python-multipart
+argparse
+sqlalchemy
+websockets

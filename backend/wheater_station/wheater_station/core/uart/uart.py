@@ -1,10 +1,16 @@
 import serial
-from wheater_station.settings import BAUDRATE, SERIAL_PORT, SERIAL_TIMEOUT
+from time import sleep
+# from wheater_station.settings import BAUDRATE, SERIAL_PORT, SERIAL_TIMEOUT
+
+# UART settings:
+BAUDRATE = 9600
+SERIAL_PORT = '/dev/ttyS0'
+SERIAL_TIMEOUT = 1
 
 class SerialUART:
     _instance = None
 
-    def __new__(cls, port : str = SERIAL_PORT, baudrate : int = BAUDRATE, timeout : int = SERIAL_TIMEOUT) -> serial.Serial:
+    def __new__(cls, port : str = SERIAL_PORT, baudrate : int = BAUDRATE, timeout : int = SERIAL_TIMEOUT, *args, **kwargs) -> serial.Serial:
         if cls._instance is None:
             cls._instance = super(SerialUART, cls).__new__(cls)
             cls._instance.port = port
@@ -35,19 +41,37 @@ class SerialUART:
             received_data = received_data.decode('utf-8')
             return received_data
 
+    def get_counts(self, target: str):
+        target = f"#{target.upper()}*"
+        port_instance = SerialUART()
+        port_instance.timeout = 1
+        sleep(0.1)
+        port_instance.open_connection()
+        sleep(0.1)
+        port_instance.write_data(target)
+        sleep(0.5)
+        data = port_instance.read_data()
+        sleep(0.1)
+        port_instance.close_connection()
+        return int(data)
+    
 # Uso del Singleton
 if __name__ == "__main__":
-    from time import sleep
     from datetime import datetime
+    TEMP="#DEBUG*"
+    sensors = ["#TEMP*","#ANEMOMETER*","#RAIN_DROP*","#SOIL_MOISTURE*","#UV_LEVEL*"]
     while 1:
-        port_instance_1 = SerialUART()
+        for sensor in sensors:
 
-        port_instance_1.open_connection()
+            port_instance_1 = SerialUART()
 
-        port_instance_1.write_data(f"Hola desde {port_instance_1.port}: {datetime.utcnow()}")
-        sleep(0.03)
-        data1 = port_instance_1.read_data()
+            port_instance_1.open_connection()
 
-        print(data1)
+            port_instance_1.write_data(sensor)
+            sleep(1)
+            data1 = port_instance_1.read_data()
 
-        port_instance_1.close_connection()
+            print(f"{sensor}: {data1}")
+
+            port_instance_1.close_connection()
+

@@ -1,7 +1,8 @@
 from fastapi import APIRouter
-from wheater_station.core.db.db_connect import db_health
-from wheater_station.core.db.charts import Chart
-from wheater_station.apis.v1_schemas import InsertChartData
+from core.db.db_connect import db_health
+from core.db.charts import Chart
+from apis.v1_schemas import InsertChartData
+from core.sensors.temperature_sensor import TemperatureSensor as ts
 
 router = APIRouter()
 
@@ -9,8 +10,8 @@ router = APIRouter()
 def check_database_health():
     return db_health()
 
-@router.get("/records/{type}", tags=["📈 Chart APIs"])
-async def get_chart_records(type: str, time_lapse_minutes: int):
+@router.get("/records", tags=["📈 Chart APIs"])
+async def get_chart_records():
     '''
     <p>
     Esta API se utiliza para recuperar los datos de cada grafico de manera
@@ -28,10 +29,7 @@ async def get_chart_records(type: str, time_lapse_minutes: int):
     Si time_lapse_minutes = 0, entonces nos va a traer el último registro para el grafico seleccionado.
     </p>
     '''
-    result = await Chart.get_chart_data(
-        chart_type=type,
-        time_lapse_minutes=time_lapse_minutes
-        )
+    result = ts.read_once()
     return result
 
 
