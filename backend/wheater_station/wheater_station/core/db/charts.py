@@ -1,7 +1,7 @@
 from sqlalchemy import insert, func
 from datetime import datetime, timedelta
 from sqlalchemy import Column, Integer, String, DateTime, JSON
-from wheater_station.core.db.db_connect import (
+from core.db.db_connect import (
     ENGINE,
     BASE,
     SESSION,

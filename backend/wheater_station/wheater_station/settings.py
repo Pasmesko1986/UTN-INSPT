@@ -18,6 +18,6 @@ POSTGRES_HOST = os.getenv('POSTGRES_HOST')
 DB_PORT = os.getenv('DB_PORT')
 
 # UART settings:
-BAUDRATE = 115200
+BAUDRATE = 9600
 SERIAL_PORT = '/dev/ttyS0'
 SERIAL_TIMEOUT = 1

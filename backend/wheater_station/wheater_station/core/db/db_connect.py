@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import declarative_base
 
-from wheater_station.settings import (
+from settings import (
     POSTGRES_DB,
     POSTGRES_USER,
     POSTGRES_PASSWORD,
