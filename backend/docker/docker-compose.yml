@@ -10,7 +10,7 @@ services:
       - ../database:/var/lib/postgresql/data
 
     env_file:
-      - ../wheater_station/wheater_station/.env
+      - ../wheater_station/.env
     ports:
       - 5432:5432
 
@@ -36,7 +36,7 @@ services:
     volumes:
       # Source code directory:
       - type: bind
-        source: ../wheater_station/wheater_station/core/tools/docker_startup/
+        source: ../wheater_station
         target: /app
     # Used ports:
     ports:
@@ -45,9 +45,11 @@ services:
     # Cosole control:
     stdin_open: true
     tty: true
+    devices:
+      - "/dev/ttyS0:/dev/ttyS0"
     env_file:
-      - ../wheater_station/wheater_station/.env
+      - ../wheater_station/.env
     # Command to execute at start:
     # command: sh -c "while true; do sleep 1; done"
-    command: python startup.py
+    command: python main.py
     depends_on: ["db"]

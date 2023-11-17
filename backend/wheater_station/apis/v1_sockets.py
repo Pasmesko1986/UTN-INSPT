@@ -2,6 +2,10 @@ from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 import asyncio
 from datetime import datetime
+import json
+import random
+from core.sensors.temperature_sensor import TemperatureSensor as ts
+from core.tools.geolocalization import get_actual_position
 router = APIRouter()
 
 # Almacenar las conexiones WebSocket activas
@@ -36,13 +40,25 @@ html_content = """
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     websocket_connections.append(websocket)
-
+    position = {}
     try:
         while True:
-            await asyncio.sleep(0.03)
-
-            message = f"This is a message from the server at {datetime.utcnow()}"
-            await websocket.send_text(message)
+            await asyncio.sleep(1)
+            try:
+                # position = get_actual_position()
+                message={
+                    "onload": False,
+                    "day": True,
+                    "temp": f'{ts.read_once()}',
+                    "humidity": f'{random.randint(10,100)}',
+                    "uv_index": f'{random.randint(1,12)}',
+                    "rain": False,
+                    "atmospheric_pressure": f'{random.randint(1000,2000)}'
+                }
+            # message = f"This is a message from the server at {datetime.utcnow()}"
+                await websocket.send_text(json.dumps({**message, **position}))
+            except Exception as error:
+                print(f'error: {error}')
     except WebSocketDisconnect:
         websocket_connections.remove(websocket)
 
