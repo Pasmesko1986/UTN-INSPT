@@ -13,26 +13,21 @@ SHELL ["/bin/bash", "-c"]
 # Install poetry and compilation dependencies
 RUN apt-get update && apt-get install -y 
 RUN pip install --upgrade pip
-RUN pip install poetry
-RUN groupadd dsuser
-RUN useradd --create-home -g dsuser dsuser
+RUN apt-get install libpq-dev python-dev-is-python3 -y
+RUN apt-get install gcc -y
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
 # Install python dependencies in /.venv
-COPY pyproject.toml poetry.lock ./
-RUN poetry config virtualenvs.create false &&  poetry install --no-root --no-dev
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 
 # Create and switch to a new user
-WORKDIR /app
 
 # Install application into container
-COPY dist/ ./dist
-RUN pip install dist/*.whl
-RUN rm -rf pyproject.toml poetry.lock dist
-USER dsuser
+COPY . ./app
+WORKDIR /app
 
-COPY /wheater_station/core/tools/docker_startup/startup.py /app
 EXPOSE 8020
 EXPOSE 5432
 CMD python startup.py

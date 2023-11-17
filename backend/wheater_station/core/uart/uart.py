@@ -5,7 +5,7 @@ from time import sleep
 # UART settings:
 BAUDRATE = 9600
 SERIAL_PORT = '/dev/ttyS0'
-SERIAL_TIMEOUT = 1
+SERIAL_TIMEOUT = 1.0
 
 class SerialUART:
     _instance = None
@@ -21,13 +21,18 @@ class SerialUART:
 
     def open_connection(self):
         if not self.serial or not self.serial.is_open:
-            self.serial = serial.Serial(self.port, self.baudrate)
-            print(f"Conexión abierta en el puerto {self.port} a {self.baudrate} baudios")
+            self.serial = serial.Serial(
+                port=self.port,
+                baudrate=self.baudrate,
+                timeout=self.timeout,
+                write_timeout=self.timeout
+                )
+            # print(f"Conexión abierta en el puerto {self.port} a {self.baudrate} baudios")
 
     def close_connection(self):
         if self.serial:
             self.serial.close()
-            print(f"Conexión cerrada en el puerto {self.port}")
+            # print(f"Conexión cerrada en el puerto {self.port}")
 
     def write_data(self, data : str):
         if self.serial:
