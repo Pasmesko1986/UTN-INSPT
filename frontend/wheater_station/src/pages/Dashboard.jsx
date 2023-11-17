@@ -11,6 +11,7 @@ import TempCard from '../components/TempCard';
 import HumidityCard from '../components/HumidityCard';
 import IndexUVCard from '../components/IndexUVCard';
 import AtmosphericPressureCard from '../components/AtmosphericPressureCard';
+import Location from '../components/Location';
 
 const BORDER = null
 // const BORDER = '1px solid red'
@@ -21,6 +22,7 @@ export default function NestedGrid() {
             <Grid container spacing={2} >
                 <Grid container item spacing={1} >
                 <TempCard />
+                <Location/>
                 </Grid>
                 <Grid container item spacing={2} sx={{margin:1}}>
                                 <HumidityCard/>

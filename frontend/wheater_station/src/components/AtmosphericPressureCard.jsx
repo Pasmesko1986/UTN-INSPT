@@ -1,11 +1,14 @@
 import Typography from '@mui/material/Typography';
 import SpeedIcon from '@mui/icons-material/Speed';
 import Grid from '@mui/material/Grid';
-
+import { useState, useContext } from "react";
+import { StreamingDataContext } from '../App';
 const BORDER = null
 // const BORDER = '1px solid red'
 
 export default function AtmosphericPressureCard() {
+  const {streamingData, setStreamingData} = useContext(StreamingDataContext);
+
   return (
     <Grid sx={{
       border:BORDER, maxWidth:200,
@@ -22,7 +25,7 @@ export default function AtmosphericPressureCard() {
       </Grid>
       <Grid sx={{border:BORDER}}>
 
-        <Typography variant="h4"> 1019mb </Typography>
+        <Typography variant="h4"> {streamingData?.atmospheric_pressure}mb </Typography>
         <Typography gutterBottom variant="h7" component="div"> Atmospheric pressure</Typography>
       </Grid>
 
